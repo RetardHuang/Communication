@@ -85,7 +85,7 @@ void setup()
 }
 /////////////////////////////////////////////////////////////
 /*
-int * calcuPWM(int degree){
+int * calcuPWM(int Degr){
   int value[2];
   value[0]=.....;
   value[1]=.....;
@@ -93,7 +93,12 @@ int * calcuPWM(int degree){
 }
 //When we wanna use it:
 int VALUE*;//!!!!
-VALUE= calcuPWM;
+VALUE= calcuPWM(degree);
+
+*(VALUE)=...;//value[0] in function calcuPWM
+*(VALUE+1)=...;///value[1] in function calcuPWM
+
+
 */
 ///////////////////////////////////////////////////////////////////////////////
 /*
