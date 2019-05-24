@@ -202,43 +202,43 @@ void loop()
  if ( Serial.available())
 {   
   switch(Serial.read()){
-    case 'G': //go straight
+    case 'w': //go straight
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     gostraight();
-    delay(200);
-    //stopCar();
+    delay(400);
+    stopCar();
     //delay(100);
     break;                                                                                                                                                                                                                                                                                                                     
   
-    case 'L'://turn left
+    case 'a'://turn left
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     turnleft();
     delay(200);
-    //stopCar();
+    stopCar();
     //delay(400);
     break;
     
-    case 'R'://turn right
+    case 'd'://turn right
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     turnright();
     delay(200);
-    //stopCar();
+    stopCar();
     //delay(400);
     break;
 
-    case 'B'://Back
+    case 's'://Back
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     retreat();
     delay(200);
-    //stopCar();
+    stopCar();
     //delay(400);
     break;
 
-    case 'S'://Stop
+    case 'q'://Stop
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     stopCar();
