@@ -10,11 +10,12 @@ int ENB = 11;//PWM2
 
 unsigned long time = 240000;  //delay time
 unsigned long time_s = 5000; //stop time
-int value1 = 230;  //the duty cycle
-int value2 = 200;  //the duty cycle
-int value3 = 120; 
-int value4 = 100; 
-
+int value1 = 230;  //go straight;the duty cycle
+int value2 = 200; 
+int value3 = 230; //turn left
+int value4 = 200; 
+int value5 = 120; //turn right
+int value6 = 100; 
     //go straight
   void gostraight(void)
   {
@@ -76,7 +77,7 @@ void setup()
     pinMode(ENA, OUTPUT);
     pinMode(ENB, OUTPUT);
 }
-char direction;
+  char direction;
 void loop()
 {
   //analogWrite(ENA,value1);//set speed
@@ -86,27 +87,27 @@ switch(direction){
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     gostraight();
-    delay(400);
-    //stopCar();
-    //delay(200); 
+    delay(100);
+    stopCar();
+    delay(100); 
     break;                                                                                                                                                                                                                                                                                                                     
   
     case 'a'://turn left
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);
+    analogWrite(ENA,value3);//set speed
+    analogWrite(ENB,value4);
     turnleft();
-    delay(200);
-    //stopCar();
-    //delay(200);
+    delay(100);
+    stopCar();
+    delay(100);
     break;
     
     case 'd'://turn right
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);
+    analogWrite(ENA,value5);//set speed
+    analogWrite(ENB,value6);
     turnright();
-    delay(200);
-    //stopCar();
-    //delay(3000);
+    delay(100);
+    stopCar();
+    delay(100);
     break;
 
     case 's'://Back
@@ -114,8 +115,8 @@ switch(direction){
     analogWrite(ENB,value2);//set speed
     retreat();
     delay(200);
-    //stopCar();
-    //delay(400);
+    stopCar();
+    delay(400);
     break;
 
     case 'q'://Stop
@@ -128,7 +129,7 @@ switch(direction){
     default:
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
-    gostraight();
+    stopCar();
     delay(400);
     break;
     }
