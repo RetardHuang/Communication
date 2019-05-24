@@ -37,10 +37,10 @@ void serialEvent() {
     // add it to the inputString:
     // if the incoming character is a newline, set a flag so the main loop can
     // do something about it:
-    if (inChar > 'a' && inChar <'z') {
+    if (inChar >= 'a' && inChar <='z') {
       stringComplete = true;
       Direction=inChar;
-      degree=inputString.toInt();    
+      degree=inputString.toInt(); 
     }
     else{
       inputString+= inChar;
