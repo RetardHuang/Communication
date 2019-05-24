@@ -86,29 +86,45 @@ switch(direction){
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     gostraight();
-    delay(800);
-    stopCar();
-    delay(200); 
+    delay(400);
+    //stopCar();
+    //delay(200); 
     break;                                                                                                                                                                                                                                                                                                                     
   
     case 'a'://turn left
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     turnleft();
-    delay(400);
-    stopCar();
     delay(200);
+    //stopCar();
+    //delay(200);
     break;
     
     case 'd'://turn right
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     turnright();
-    delay(400);
-    stopCar();
-    delay(3000);
+    delay(200);
+    //stopCar();
+    //delay(3000);
     break;
 
+    case 's'://Back
+    analogWrite(ENA,value1);//set speed
+    analogWrite(ENB,value2);//set speed
+    retreat();
+    delay(200);
+    //stopCar();
+    //delay(400);
+    break;
+
+    case 'q'://Stop
+    analogWrite(ENA,value1);//set speed
+    analogWrite(ENB,value2);//set speed
+    stopCar();
+    delay(200);
+    break;
+    
     default:
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
