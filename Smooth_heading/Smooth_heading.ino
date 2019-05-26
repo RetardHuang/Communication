@@ -108,60 +108,27 @@ The Direction seems MEANINGLESS
 ///////////////////////////////////////////////////////////////////////////////
 void loop()
 {
+
   //analogWrite(ENA,value1);//set speed
   //analogWrite(ENB,value2);//set speed
-  switch(Direction){
-  case 'w': //go straight
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);
-    gostraight();
-    delay(100);
-    stopCar();
-    delay(100); 
-    break;                                                                                                                                                                                                                                                                                                                     
-
-  case 'a'://turn left
-    analogWrite(ENA,value3);//set speed
-    analogWrite(ENB,value4);
-    turnleft();
-    delay(100);
-    stopCar();
-    delay(100);
-    break;
-
-  case 'd'://turn right
-    analogWrite(ENA,value5);//set speed
-    analogWrite(ENB,value6);
-    turnright();
-    delay(100);
-    stopCar();
-    delay(100);
-    break;
-
-  case 's'://Back
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);//set speed
-    retreat();
-    delay(200);
-    stopCar();
-    delay(400);
-    break;
-
-  case 'q'://Stop
+  if(Direction='q'){
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     stopCar();
-    delay(200);
-    break;
-
-  default:
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);
-    stopCar();
-    delay(400);
-    break;
   }
-
+  else{
+    if(Direction=='w'){//Go straight
+      analogWrite(ENA,value1);//set speed
+      analogWrite(ENB,value2);
+    } 
+    else{
+      int VALUE*=[0,0];
+      VALUE=calcuPWM(degree);
+      analogWrite(ENA,*(VALUE));//set speed
+      analogWrite(ENB,*(VALUE+1));
+    }
+    gostraight();
+  }
 }
 /*
   SerialEvent occurs whenever a new data comes in the hardware serial RX. This
