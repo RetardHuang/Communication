@@ -83,29 +83,14 @@ void setup()
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
 }
-/////////////////////////////////////////////////////////////
-/*
 int * calcuPWM(int Degr){
   int value[2];
-  value[0]=.....;
-  value[1]=.....;
+  value[0]=195-Degr*0.39;
+  value[1]=170+Degr*0.34;
   return value;
 }
-//When we wanna use it:
-int VALUE*;//!!!!
-VALUE= calcuPWM(degree);
-
-*(VALUE)=...;//value[0] in function calcuPWM
-*(VALUE+1)=...;///value[1] in function calcuPWM
 
 
-*/
-///////////////////////////////////////////////////////////////////////////////
-/*
-I also suggest you that use if, beacuse after we calculated the PWM of the tire
-The Direction seems MEANINGLESS
-*/
-///////////////////////////////////////////////////////////////////////////////
 void loop()
 {
 
