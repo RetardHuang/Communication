@@ -3,7 +3,8 @@ char Direction;
 String inputString = "";         // a String to hold incoming data 
 bool stringComplete = false;  // whether the string is complete
 //Define the Received data.
-
+int VALUE1=0;
+int VALUE2=0;
 
 //define the left and right sides of motors' control pins
 int IN1 = 7;//leftMotor_1
@@ -83,36 +84,45 @@ void setup()
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
 }
-int * calcuPWM(int Degr){
-  int value[2];
-  value[0]=195-Degr*0.39;
-  value[1]=170+Degr*0.34;
-  return value;
+
+void calcuPWM(int Degr){
+  VALUE1=int(200-Degr*0.2);
+  VALUE2=int(180+Degr*0.2);
 }
 
 
 void loop()
 {
+       Serial.write(degree);   
+  if(stringComplete){
 
-  //analogWrite(ENA,value1);//set speed
-  //analogWrite(ENB,value2);//set speed
-  if(Direction='q'){
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);//set speed
-    stopCar();
-  }
-  else{
-    if(Direction=='w'){//Go straight
+    //analogWrite(ENA,value1);//set speed
+    //analogWrite(ENB,value2);//set speed
+    if(Direction=='q'){
       analogWrite(ENA,value1);//set speed
-      analogWrite(ENB,value2);
-    } 
-    else{
-      int VALUE*=[0,0];
-      VALUE=calcuPWM(degree);
-      analogWrite(ENA,*(VALUE));//set speed
-      analogWrite(ENB,*(VALUE+1));
+      analogWrite(ENB,value2);//set speed
+      stopCar();
+
     }
-    gostraight();
+    else{
+      if(Direction=='w'){//Go straight
+        analogWrite(ENA,value1);//set speed
+        analogWrite(ENB,value2);
+
+      } 
+      else{
+        calcuPWM(degree);
+        Serial.write(degree);         
+        analogWrite(ENA,VALUE1);//set speed
+        analogWrite(ENB,VALUE2);
+        //Serial.write(*VALUE);
+        Serial.write(VALUE1);        
+      }
+      gostraight();
+    }
+    inputString = "";   
+    stringComplete = false;
+    degree=0;
   }
 }
 /*
@@ -131,11 +141,14 @@ void serialEvent() {
     if (inChar >='a'  && inChar <='z') {
       stringComplete = true;
       Direction=inChar;
-      degree=inputString.toInt();  
+      degree=inputString.toInt();
+
     }
     else{
       inputString+= inChar;
     }
-  }
+  } 
 }
+
+
 
