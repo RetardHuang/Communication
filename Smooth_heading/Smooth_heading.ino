@@ -3,8 +3,6 @@ char Direction;
 String inputString = "";         // a String to hold incoming data 
 bool stringComplete = false;  // whether the string is complete
 //Define the Received data.
-int VALUE1=0;
-int VALUE2=0;
 
 //define the left and right sides of motors' control pins
 int IN1 = 7;//leftMotor_1
@@ -27,7 +25,7 @@ int value6 = 100;
 void gostraight(void)
 {
   //the left motor rotates forward, the right motor rotates forward
-  digitalWrite(IN1,HIGH);
+
   digitalWrite(IN2,LOW);
   digitalWrite(IN3,LOW);
   digitalWrite(IN4,HIGH);
@@ -85,15 +83,18 @@ void setup()
   pinMode(ENB, OUTPUT);
 }
 
-void calcuPWM(int Degr){
-  VALUE1=int(200-Degr*0.2);
-  VALUE2=int(180+Degr*0.2);
+void calcuPWM1(int Degr){
+  int VALUE1=200-Degr*0.2;
+  return VALUE1
 }
 
+void calcuPWM2(int Degr){
+  int VALUE2=180+Degr*0.2;
+  return VALUE2;
+}
 
 void loop()
 {
-       Serial.write(degree);   
   if(stringComplete){
 
     //analogWrite(ENA,value1);//set speed
@@ -101,22 +102,17 @@ void loop()
     if(Direction=='q'){
       analogWrite(ENA,value1);//set speed
       analogWrite(ENB,value2);//set speed
-      stopCar();
 
+      stopCar();
     }
     else{
       if(Direction=='w'){//Go straight
         analogWrite(ENA,value1);//set speed
         analogWrite(ENB,value2);
-
       } 
       else{
-        calcuPWM(degree);
-        Serial.write(degree);         
-        analogWrite(ENA,VALUE1);//set speed
-        analogWrite(ENB,VALUE2);
-        //Serial.write(*VALUE);
-        Serial.write(VALUE1);        
+        analogWrite(ENA,calcuPWM1(degree));//set speed
+        analogWrite(ENB,calcuPWM2(degree));
       }
       gostraight();
     }
@@ -142,7 +138,6 @@ void serialEvent() {
       stringComplete = true;
       Direction=inChar;
       degree=inputString.toInt();
-
     }
     else{
       inputString+= inChar;
