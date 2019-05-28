@@ -14,9 +14,12 @@ int IN4 = 10;//rightMotor_2
 int ENA = 5;//PWM1
 int ENB = 11;//PWM2
 
-int value1 = 130;  //go straight;the duty cycle
-int value2 = 100; 
-
+int value1 = 230;  //go straight;the duty cycle
+int value2 = 200; 
+int value3 = 230; //turn left
+int value4 = 200; 
+int value5 = 120; //turn right
+int value6 = 100; 
 
 //go straight
 void gostraight(void)
@@ -81,12 +84,12 @@ void setup()
 }
 
 int calcuPWM1(int Degr){
-  int VALUE1=100-Degr*3;
+  int VALUE1=100-Degr*1.2;
   return VALUE1;
 }
 
 int calcuPWM2(int Degr){
-  int VALUE2=100+Degr*3;
+  int VALUE2=100+Degr*1.0 ;
   return VALUE2;
 }
 
@@ -99,19 +102,20 @@ void loop()
     if(Direction=='q'){
       analogWrite(ENA,value1);//set speed
       analogWrite(ENB,value2);//set speed
-
       stopCar();
     }
     else{
       if(Direction=='w'){//Go straight
-        analogWrite(ENA,value1);//set speed
-        analogWrite(ENB,value2);
+        analogWrite(ENA,200);//set speed
+        analogWrite(ENB,200);
+        gostraight();
       } 
       else{
         analogWrite(ENA,calcuPWM1(degree));//set speed
         analogWrite(ENB,calcuPWM2(degree));
+        gostraight();
       }
-      gostraight();
+      
     }
     inputString = "";   
     stringComplete = false;

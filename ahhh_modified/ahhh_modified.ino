@@ -14,8 +14,8 @@ int value1 = 230;  //go straight;the duty cycle
 int value2 = 200; 
 int value3 = 230; //turn left
 int value4 = 200; 
-int value5 = 120; //turn right
-int value6 = 100; 
+int value5 = 230; //turn right
+int value6 = 200; 
     //go straight
   void gostraight(void)
   {
