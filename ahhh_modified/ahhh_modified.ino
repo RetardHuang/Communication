@@ -87,9 +87,9 @@ switch(direction){
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     gostraight();
-    delay(100);
+    delay(150);
     stopCar();
-    delay(100); 
+    delay(250); 
     break;                                                                                                                                                                                                                                                                                                                     
   
     case 'a'://turn left
@@ -98,7 +98,7 @@ switch(direction){
     turnleft();
     delay(100);
     stopCar();
-    delay(100);
+    delay(300);
     break;
     
     case 'd'://turn right
@@ -107,7 +107,7 @@ switch(direction){
     turnright();
     delay(100);
     stopCar();
-    delay(100);
+    delay(300);
     break;
 
     case 's'://Back
