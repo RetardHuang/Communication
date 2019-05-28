@@ -71,12 +71,12 @@ void setup()
 }
 
 int calcuPWM1(int Degr){
-  int VALUE1=100-Degr*3;
+  int VALUE1=100-Degr*2;
   return VALUE1;
 }
 
 int calcuPWM2(int Degr){
-  int VALUE2=100+Degr*3;
+  int VALUE2=100+Degr*2;
   return VALUE2;
 }
 
@@ -85,29 +85,30 @@ void loop()
   if(stringComplete){
 
     switch(Direction){
-      case 'w': //go straight
+    case 'w': //go straight
       analogWrite(ENA,value1);//set speed
       analogWrite(ENB,value2);//set speed
       gostraight();
       break;
-    
-      case 'a'://turn left
+
+    case 'a'://turn left
       analogWrite(ENA,calcuPWM1(degree));//set speed
-      analogWrite(ENB,value2);//set speed
+      analogWrite(ENB,calcuPWM2(degree));//set speed
       turnleft();
       break;
-      
-      case 'd'://turn right
-      analogWrite(ENA,value1);//set speed
+
+    case 'd'://turn right
+      analogWrite(ENA,calcuPWM1(degree));//set speed
       analogWrite(ENB,calcuPWM2(degree));//set speed
       turnright();
       break;
 
-      case 'q'://Stop
-      analogWrite(ENA,value1);//set speed
-      analogWrite(ENB,value2);//set speed
+    case 'q'://Stop
+      analogWrite(ENA,0);//set speed
+      analogWrite(ENB,0);//set speed
       stopCar();
       break;
+    }
 
     inputString = "";   
     stringComplete = false;
@@ -137,6 +138,7 @@ void serialEvent() {
     }
   } 
 }
+
 
 
 
