@@ -28,22 +28,13 @@ void gostraight(void)
   digitalWrite(IN4,HIGH);
 }
 
-//retreat
-void retreat(void)
-{
-  //the left motor rotates reversed, the right motor rotates reversed
-  digitalWrite(IN1,LOW);
-  digitalWrite(IN2,HIGH);
-  digitalWrite(IN3,HIGH);
-  digitalWrite(IN4,LOW);
-}
 //turn left
 void turnleft(void)
 {
   //the left motor rotates reversed, the right motor rotates forward
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
-  digitalWrite(IN3,HIGH);
+  digitalWrite(IN3,LOW);
   digitalWrite(IN4,LOW);
 }
 
@@ -52,7 +43,7 @@ void turnright(void)
 {
   //the left motor rotates forward, the right motor rotates reversed
   digitalWrite(IN1,LOW);
-  digitalWrite(IN2,HIGH);
+  digitalWrite(IN2,LOW);
   digitalWrite(IN3,LOW);
   digitalWrite(IN4,HIGH);
 }
@@ -66,7 +57,6 @@ void stopCar(void)
   digitalWrite(IN3,LOW);
   digitalWrite(IN4,LOW);
 }
-
 
 void setup() 
 {   
@@ -94,25 +84,31 @@ void loop()
 {
   if(stringComplete){
 
-    //analogWrite(ENA,value1);//set speed
-    //analogWrite(ENB,value2);//set speed
-    if(Direction=='q'){
+    switch(Direction){
+      case 'w': //go straight
       analogWrite(ENA,value1);//set speed
       analogWrite(ENB,value2);//set speed
-
-      stopCar();
-    }
-    else{
-      if(Direction=='w'){//Go straight
-        analogWrite(ENA,value1);//set speed
-        analogWrite(ENB,value2);
-      } 
-      else{
-        analogWrite(ENA,calcuPWM1(degree));//set speed
-        analogWrite(ENB,calcuPWM2(degree));
-      }
       gostraight();
-    }
+      break;
+    
+      case 'a'://turn left
+      analogWrite(ENA,calcuPWM1(degree));//set speed
+      analogWrite(ENB,value2);//set speed
+      turnleft();
+      break;
+      
+      case 'd'://turn right
+      analogWrite(ENA,value1);//set speed
+      analogWrite(ENB,calcuPWM2(degree));//set speed
+      turnright();
+      break;
+
+      case 'q'://Stop
+      analogWrite(ENA,value1);//set speed
+      analogWrite(ENB,value2);//set speed
+      stopCar();
+      break;
+
     inputString = "";   
     stringComplete = false;
     degree=0;
