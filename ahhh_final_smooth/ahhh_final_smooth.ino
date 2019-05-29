@@ -35,60 +35,60 @@ int ENB = 11;//PWM2
 
 unsigned long time = 240000;  //delay time
 unsigned long time_s = 5000; //stop time
-int value1 = 230;  //go straight;the duty cycle
-int value2 = 200; 
-int value3 = 230; //turn left
-int value4 = 200; 
-int value5 = 230; //turn right
-int value6 = 200; 
-    //go straight
-  void gostraight(void)
-  {
-    //the left motor rotates forward, the right motor rotates forward
-    digitalWrite(IN1,HIGH);
-    digitalWrite(IN2,LOW);
-    digitalWrite(IN3,LOW);
-    digitalWrite(IN4,HIGH);
-    }
-  
-  //retreat
-  void retreat(void)
-  {
-    //the left motor rotates reversed, the right motor rotates reversed
-    digitalWrite(IN1,LOW);
-    digitalWrite(IN2,HIGH);
-    digitalWrite(IN3,HIGH);
-    digitalWrite(IN4,LOW);
-    }
-    //turn left
-  void turnleft(void)
-  {
-    //the left motor rotates reversed, the right motor rotates forward
-    digitalWrite(IN1,HIGH);
-    digitalWrite(IN2,LOW);
-    digitalWrite(IN3,HIGH);
-    digitalWrite(IN4,LOW);
-    }
+int value1 = 150;  //go straight;the duty cycle
+int value2 = 120; 
+int value3 = 200; //turn left
+int value4 = 170; 
+int value5 = 200; //turn right
+int value6 = 170; 
+//go straight
+void gostraight(void)
+{
+  //the left motor rotates forward, the right motor rotates forward
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
+}
 
-    //turn right
-  void turnright(void)
-  {
-    //the left motor rotates forward, the right motor rotates reversed
-    digitalWrite(IN1,LOW);
-    digitalWrite(IN2,HIGH);
-    digitalWrite(IN3,LOW);
-    digitalWrite(IN4,HIGH);
-    }
+//retreat
+void retreat(void)
+{
+  //the left motor rotates reversed, the right motor rotates reversed
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
+  digitalWrite(IN3,HIGH);
+  digitalWrite(IN4,LOW);
+}
+//turn left
+void turnleft(void)
+{
+  //the left motor rotates reversed, the right motor rotates forward
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
+  digitalWrite(IN3,HIGH);
+  digitalWrite(IN4,LOW);
+}
 
-    //stop
-   void stopCar(void)
-  {
-    //the left motor brakes, the right motor brakes
-    digitalWrite(IN1,LOW);
-    digitalWrite(IN2,LOW);
-    digitalWrite(IN3,LOW);
-    digitalWrite(IN4,LOW);
-    }
+//turn right
+void turnright(void)
+{
+  //the left motor rotates forward, the right motor rotates reversed
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
+}
+
+//stop
+void stopCar(void)
+{
+  //the left motor brakes, the right motor brakes
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,LOW);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,LOW);
+}
 // defines pins numbers
 const int echoPin1 = 13;
 const int trigPin = 12;
@@ -97,54 +97,54 @@ const int trigPin = 12;
 
 void setup() 
 {   
-    Serial.begin(9600); // 9600 bps
-    // set pins as output
-    pinMode(IN1, OUTPUT);
-    pinMode(IN2, OUTPUT);
-    pinMode(IN3, OUTPUT);
-    pinMode(IN4, OUTPUT);
-    pinMode(ENA, OUTPUT);
-    pinMode(ENB, OUTPUT);
-    pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-    pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
-    pinMode(cali,OUTPUT);
-    digitalWrite(cali, LOW);
+  Serial.begin(9600); // 9600 bps
+  // set pins as output
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
+  pinMode(cali,OUTPUT);
+  digitalWrite(cali, LOW);
 }
-  char direction;
-  int ultrasonicsensor1(){
-long duration;
-int distance;
-// Clears the trigPin
-digitalWrite(trigPin, LOW);
-delayMicroseconds(2);
-// Sets the trigPin on HIGH state for 10 micro seconds
-digitalWrite(trigPin, HIGH);
-delayMicroseconds(10);
-digitalWrite(trigPin, LOW);
-// Reads the echoPin, returns the sound wave travel time in microseconds
-duration = pulseIn(echoPin1, HIGH);
-// Calculating the distance
-distance= duration*0.034/2;
-// Prints the distance on the Serial Monitor
-return (distance) ;
-  }
+char direction;
+int ultrasonicsensor1(){
+  long duration;
+  int distance;
+  // Clears the trigPin
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin1, HIGH);
+  // Calculating the distance
+  distance= duration*0.034/2;
+  // Prints the distance on the Serial Monitor
+  return (distance) ;
+}
 
-   int distance1=0;
- int distance2=0;
- //int angle2=0;
+int distance1=0;
+int distance2=0;
+//int angle2=0;
 
 double getDegree(){
   double startTime = millis();
   while(millis()-startTime<50) {
-  MPU6050_read();
+    MPU6050_read();
   }
   nowDegree = angle[2];
   ay = a[1];
   wy = w[0];
   return angle[2];
-  }
+}
 
-  /*--------------------------------------------------------*/
+/*--------------------------------------------------------*/
 //读取MPU6050的数据，并存入三个数组a[]、angle[]、w[]中
 void MPU6050_read(){
   while (Serial.available()) {    
@@ -154,66 +154,70 @@ void MPU6050_read(){
     counter++;       
     if(counter==11)             //接收到11个数据
     {    
-       counter=0;               //重新赋值，准备下一帧数据的接收 
-       sign=1;
+      counter=0;               //重新赋值，准备下一帧数据的接收 
+      sign=1;
     }      
   }
-  
+
   if(sign)
   {  
-     sign=0;
-     if(Re_buf[0]==0x55)      //检查帧头
-     {  
-  switch(Re_buf [1])
-  {
-  case 0x51:
-    a[0] = (short(Re_buf [3]<<8| Re_buf [2]))/32768.0*16;
-    a[1] = (short(Re_buf [5]<<8| Re_buf [4]))/32768.0*16;
-    a[2] = (short(Re_buf [7]<<8| Re_buf [6]))/32768.0*16;
-    T = (short(Re_buf [9]<<8| Re_buf [8]))/340.0+36.25;
-    break;
-  case 0x52:
-    w[0] = (short(Re_buf [3]<<8| Re_buf [2]))/32768.0*2000;
-    w[1] = (short(Re_buf [5]<<8| Re_buf [4]))/32768.0*2000;
-    w[2] = (short(Re_buf [7]<<8| Re_buf [6]))/32768.0*2000;
-    T = (short(Re_buf [9]<<8| Re_buf [8]))/340.0+36.25;
-    break;
-  case 0x53:
-          angle[0] = (short(Re_buf [3]<<8| Re_buf [2]))/32768.0*180;
-    angle[1] = (short(Re_buf [5]<<8| Re_buf [4]))/32768.0*180;
-    angle[2] = (short(Re_buf [7]<<8| Re_buf [6]))/32768.0*180;
-    T = (short(Re_buf [9]<<8| Re_buf [8]))/340.0+36.25;
-    break;
+    sign=0;
+    if(Re_buf[0]==0x55)      //检查帧头
+    {  
+      switch(Re_buf [1])
+      {
+      case 0x51:
+        a[0] = (short(Re_buf [3]<<8| Re_buf [2]))/32768.0*16;
+        a[1] = (short(Re_buf [5]<<8| Re_buf [4]))/32768.0*16;
+        a[2] = (short(Re_buf [7]<<8| Re_buf [6]))/32768.0*16;
+        T = (short(Re_buf [9]<<8| Re_buf [8]))/340.0+36.25;
+        break;
+      case 0x52:
+        w[0] = (short(Re_buf [3]<<8| Re_buf [2]))/32768.0*2000;
+        w[1] = (short(Re_buf [5]<<8| Re_buf [4]))/32768.0*2000;
+        w[2] = (short(Re_buf [7]<<8| Re_buf [6]))/32768.0*2000;
+        T = (short(Re_buf [9]<<8| Re_buf [8]))/340.0+36.25;
+        break;
+      case 0x53:
+        angle[0] = (short(Re_buf [3]<<8| Re_buf [2]))/32768.0*180;
+        angle[1] = (short(Re_buf [5]<<8| Re_buf [4]))/32768.0*180;
+        angle[2] = (short(Re_buf [7]<<8| Re_buf [6]))/32768.0*180;
+        T = (short(Re_buf [9]<<8| Re_buf [8]))/340.0+36.25;
+        break;
+      } 
+    }
   } 
-  }
-  } 
-  }
+}
 
-  
+
 void loop()
-{
+{  
+  unsigned long starttime;
+  unsigned long stoptime;
+  unsigned long looptime;
+  starttime = millis();
   //analogWrite(ENA,value1);//set speed
   //analogWrite(ENB,value2);//set speed
-switch(direction){
-    case 'w': //go straight
+  switch(direction){
+  case 'w': //go straight
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     gostraight();
     break;                                                                                                                                                                                                                                                                                                                     
-  
-    case 'a'://turn left
+
+  case 'a'://turn left
     analogWrite(ENA,value3);//set speed
     analogWrite(ENB,value4);
     turnleft();
     break;
-    
-    case 'd'://turn right
+
+  case 'd'://turn right
     analogWrite(ENA,value5);//set speed
     analogWrite(ENB,value6);
     turnright();
     break;
 
-    case 's'://Back
+  case 's'://Back
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     retreat();
@@ -222,16 +226,16 @@ switch(direction){
     delay(400);
     break;
 
-    case 'q'://Stop
+  case 'q'://Stop
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     stopCar();
     delay(200);
     break;
 
-    case 'z'://Stop
-    analogWrite(ENA,value1);//set speed
-    analogWrite(ENB,value2);//set speed
+  case 'z'://Stop
+    analogWrite(ENA,230);//set speed
+    analogWrite(ENB,200);//set speed
     stopCar();
     delay(3000);
     turnright();
@@ -244,53 +248,58 @@ switch(direction){
     delay(5000);
 
     //第二个弯道左转
-   while(1){
-       
-          distance1=ultrasonicsensor1();
-          delay(100);
-  //        distance2=ultrasonicsensor2();
-   //       delay(100);
-    if(distance1<=20 ){
-      turnleft();
-      while(1){
-     angle2 = getDegree();
-    Serial.println(angle2);
-      if(angle2 >=87){
-        digitalWrite(cali,LOW);//关闭MPU6050的电源，为下次重新校准做准备
-  delay(200);//保证陀螺仪彻底断电
+    while(1){
+
+      distance1=ultrasonicsensor1();
+      delay(100);
+      //        distance2=ultrasonicsensor2();
+      //       delay(100);
+      if(distance1<=20 ){
+        turnleft();
+        while(1){
+          angle2 = getDegree();
+          Serial.println(angle2);
+          if(angle2 >=87){
+            digitalWrite(cali,LOW);//关闭MPU6050的电源，为下次重新校准做准备
+            delay(200);//保证陀螺仪彻底断电
+            break;
+          }
+        }
         break;
-       }
-    }
-      break;
       }
       else{
         gostraight();
         delay(500);
-        }
+      }
     }    
     while(1){
- digitalWrite(cali,HIGH);//为MPU6050上电，使当前角度记为0°
-  delay(1000);
-     gostraight();      
-    while(1){
-      angle2 = getDegree();
-    Serial.println(angle2);
+      digitalWrite(cali,HIGH);//为MPU6050上电，使当前角度记为0°
+      delay(1000);
+      gostraight();      
+      while(1){
+        angle2 = getDegree();
+        Serial.println(angle2);
       }
     }
     break;
-    
-    default:
+
+  default:
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     stopCar();
     delay(400);
     break;
-    }
-  
+  }
+  stoptime = millis();
+
+  looptime = stoptime - starttime;
+  Serial.println(looptime);
+
 }
 void serialEvent(){
   if (Serial.available()){
     direction=Serial.read();
     Serial.println(direction);
   }
-  }
+}
+
