@@ -34,7 +34,7 @@ void turnleft(void)
   //the left motor rotates reversed, the right motor rotates forward
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
-  digitalWrite(IN3,LOW);
+  digitalWrite(IN3,HIGH);
   digitalWrite(IN4,LOW);
 }
 
@@ -43,7 +43,7 @@ void turnright(void)
 {
   //the left motor rotates forward, the right motor rotates reversed
   digitalWrite(IN1,LOW);
-  digitalWrite(IN2,LOW);
+  digitalWrite(IN2,HIGH);
   digitalWrite(IN3,LOW);
   digitalWrite(IN4,HIGH);
 }
@@ -71,12 +71,12 @@ void setup()
 }
 
 int calcuPWM1(int Degr){
-  int VALUE1=100-Degr*2;
+  int VALUE1=180-Degr*0.9;
   return VALUE1;
 }
 
 int calcuPWM2(int Degr){
-  int VALUE2=100+Degr*2;
+  int VALUE2=160+Degr*0.8;
   return VALUE2;
 }
 
@@ -92,14 +92,14 @@ void loop()
       break;
 
     case 'a'://turn left
-      analogWrite(ENA,calcuPWM1(degree));//set speed
-      analogWrite(ENB,calcuPWM2(degree));//set speed
+      analogWrite(ENA,230);//set speed
+      analogWrite(ENB,200);//set speed
       turnleft();
       break;
 
     case 'd'://turn right
-      analogWrite(ENA,calcuPWM1(degree));//set speed
-      analogWrite(ENB,calcuPWM2(degree));//set speed
+      analogWrite(ENA,230);//set speed
+      analogWrite(ENB,200);//set speed
       turnright();
       break;
 

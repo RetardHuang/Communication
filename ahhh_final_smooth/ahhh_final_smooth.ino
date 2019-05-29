@@ -87,27 +87,18 @@ switch(direction){
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);
     gostraight();
-    delay(100);
-    stopCar();
-    delay(100); 
     break;                                                                                                                                                                                                                                                                                                                     
   
     case 'a'://turn left
     analogWrite(ENA,value3);//set speed
     analogWrite(ENB,value4);
     turnleft();
-    delay(100);
-    stopCar();
-    delay(100);
     break;
     
     case 'd'://turn right
     analogWrite(ENA,value5);//set speed
     analogWrite(ENB,value6);
     turnright();
-    delay(100);
-    stopCar();
-    delay(100);
     break;
 
     case 's'://Back
@@ -130,10 +121,14 @@ switch(direction){
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     stopCar();
-    delay(200);
+    delay(3000);
     turnright();
-    delay(84);
-    gostraight();
+    delay(1200);
+    while(1){
+        gostraight();
+    }
+
+    delay(5000);
     break;
     
     default:
@@ -148,5 +143,6 @@ switch(direction){
 void serialEvent(){
   if (Serial.available()){
     direction=Serial.read();
+    Serial.println(direction);
   }
   }

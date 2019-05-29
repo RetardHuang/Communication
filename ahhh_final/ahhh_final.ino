@@ -125,15 +125,19 @@ switch(direction){
     stopCar();
     delay(200);
     break;
-    
+
     case 'z'://Stop
     analogWrite(ENA,value1);//set speed
     analogWrite(ENB,value2);//set speed
     stopCar();
-    delay(200);
+    delay(3000);
     turnright();
-    delay(84);
-    gostraight();
+    delay(1200);
+    while(1){
+        gostraight();
+    }
+
+    delay(5000);
     break;
     
     default:
@@ -148,5 +152,6 @@ switch(direction){
 void serialEvent(){
   if (Serial.available()){
     direction=Serial.read();
+    Serial.println(direction);
   }
   }
